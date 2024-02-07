@@ -39,7 +39,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "CS2002_W05::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-CS2002_W05-Debug-27da76ba29d52da819bb.json",
+					"jsonFile" : "target-CS2002_W05-Debug-4ffe6c2215bc7a35d67e.json",
 					"name" : "CS2002_W05",
 					"projectIndex" : 0
 				}
@@ -49,8 +49,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "/Users/finneganchamberlain/Desktop/CS Work/CS2002/CS2002_W05/cmake-build-debug",
-		"source" : "/Users/finneganchamberlain/Desktop/CS Work/CS2002/CS2002_W05"
+		"build" : "/home/fc84/Documents/CS2002/CS2002_W05/cmake-build-debug",
+		"source" : "/home/fc84/Documents/CS2002/CS2002_W05"
 	},
 	"version" : 
 	{
