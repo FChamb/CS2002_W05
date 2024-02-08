@@ -94,9 +94,7 @@ void runFormula(int var[], char formula[]) {
 }
 
 void findOps(char formula[]) {
-    for (int i = 0; i < sizeof(formula) - 2; i++) {
-        if (!isalpha(formula[i])) {
-            numOperators++;
-        }
+    for (int i = 0; i < sizeof(formula); i++) {
+        if (!isAlpha(formula))
     }
 }
