@@ -5,5 +5,5 @@ void flip(int col, int i, int table[]);
 void push(char element);
 char pop();
 void clear();
-void runFormula(int var[], char formula[]);
+void runFormula(int var[], char formula[], int col);
 void findOps(char formula[]);
