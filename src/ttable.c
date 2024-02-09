@@ -3,10 +3,9 @@
 #include <string.h>
 #include <ctype.h>
 #include "ttable.h"
-#define maxSize 26;
 
-static int stack[26];
-static int max = maxSize;
+static int stack[1000];
+static int max = 1000;
 static int size = 0;
 
 int main(int argc, char *argv[]) {
