@@ -8,25 +8,32 @@
 static int stack[26];
 static int max = maxSize;
 static int size = 0;
-static char alphabet[26] = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
 
 int main(int argc, char *argv[]) {
     if (argc != 3) {
-        printf("Invalid number of arguments!\n");
+        printf("Usage: %s <numberOfVariables> <'formula'>\n", argv[0]);
         return 1;
     }
 
     int col;
     sscanf(argv[1], "%d", &col);
+    if (col < 1 || col > 26) {
+        printf("Error: Number of variables should be between 1 and 26!\n");
+        return 1;
+    }
     int row = power(2, col);
     char *formula = argv[2];
+    if (strlen(formula) >= 1000) {
+        printf("Error: Formula length exceeds maximum allowed length!\n");
+        return 1;
+    }
+
     int table[row][col];
     genTable(row, col, table);
-    int output[findOps(*argv)];
-
+    int output[findOps(formula) + 1];
 
     for (int i = 0; i < col; i++) {
-        printf("%c ", alphabet[i]);
+        printf("%c ", 'a' + i);
     }
     printf(": %s : Result\n", formula);
     for (int i = 0; i < ((col * 2) + strlen(formula) + 11); i++) {
@@ -39,9 +46,15 @@ int main(int argc, char *argv[]) {
             printf("%d ", table[i][j]);
         }
         printf(": ");
-        for (int k = 0; k < col; k++) {
-            printf("%d ", output[k]);
+        int outIndex = 0;
+        for (int k = 0; k < strlen(formula); k++) {
+            if (!isalpha(formula[k]) && formula[k] != '0' && formula[k] != '1') {
+                printf("%d", output[outIndex++]);
+            } else {
+                printf(" ");
+            }
         }
+        printf(" :   %d", output[outIndex]);
         printf("\n");
     }
 
@@ -97,7 +110,7 @@ int pop() {
     if (size == 0) {
         return -1;
     } else {
-        return stack[size--];
+        return stack[--size];
     }
 }
 
@@ -107,55 +120,69 @@ void clear() {
 
 void runFormula(int var[], char formula[], int output[]) {
     clear();
+    int outIndex = 0;
     for (int i = 0; i < strlen(formula); i++) {
-        if (isalpha(formula[i])) {
-            int index = findIndex(formula[i]);
-            push(var[index]);
-            printf("a%db%d ", stack[0], stack[1]);
+        if (isalpha(formula[i]) || formula[i] == '0' || formula[i] == '1') {
+            if (formula[i] == '0' || formula[i] == '1') {
+                if (formula[i] == '0') {
+                    push(0);
+                } else {
+                    push(1);
+                }
+            } else {
+                int index = findIndex(formula[i]);
+                push(var[index]);
+            }
         } else {
             int result;
+            int opp1;
+            int opp2;
             switch (formula[i]) {
                 case '-':
-                    result = (pop() == '0') ? 1 : 0;
+                    result = (pop() == 0) ? 1 : 0;
                     break;
                 case '&':
-                    result = add(pop(), pop());
+                    opp1 = pop();
+                    opp2 = pop();
+                    result = (opp1 == 1 && opp2 == 1) ? 1: 0;
                     break;
                 case '|':
-                    result = (pop() == '1' && pop() == '1') ? 1 : 0;
+                    opp1 = pop();
+                    opp2 = pop();
+                    result = (opp1 == 1 || opp2 == 1) ? 1 : 0;
                     break;
                 case '=':
-                    result = (pop() == pop()) ? 1 : 0;
+                    opp1 = pop();
+                    opp2 = pop();
+                    result = (opp1 == opp2) ? 1 : 0;
                     break;
                 case '>':
-                    result = (pop() == '0' || pop() == '1') ? 1 : 0;
+                    opp1 = pop();
+                    opp2 = pop();
+                    result = (opp2 == 0 || opp1 == 1) ? 1 : 0;
                     break;
                 case '#':
-                    result = (pop() != pop()) ? 1 : 0;
+                    opp1 = pop();
+                    opp2 = pop();
+                    result = (opp1 != opp2) ? 1 : 0;
                     break;
                 default:
                     printf("Error: Invalid Formula!\n");
                     exit(1);
             }
-            output[i] = result;
-            //printf("result%d", result);
+            output[outIndex++] = result;
+            push(result);
+            if (i == strlen(formula) - 1) {
+                output[outIndex++] = result;
+            }
         }
-    }
-}
-
-int add(int a, int b) {
-    //printf("a%db%d", a, b);
-    if (a == '1' && b == '1') {
-        return 1;
-    } else {
-        return 0;
     }
 }
 
 int findOps(const char formula[]) {
     int numOperators = 0;
     for (int i = 0; formula[i] != '\0'; i++) {
-        if (!isalpha(formula[i])) {
+        if (!isalpha(formula[i]) && formula[i] != '0' && formula[i] != '1') {
             numOperators++;
         }
     }
@@ -164,8 +191,9 @@ int findOps(const char formula[]) {
 
 int findIndex(char val) {
     for (int i = 0; i < 26; i++) {
-        if (val == alphabet[i]) {
+        if (val == 'a' + i) {
             return i;
         }
     }
+    return -1;
 }
