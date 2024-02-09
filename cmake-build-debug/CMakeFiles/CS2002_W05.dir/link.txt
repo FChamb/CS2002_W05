@@ -1,1 +1,0 @@
-/usr/lib64/ccache/cc -g CMakeFiles/CS2002_W05.dir/src/ttable.c.o -o CS2002_W05 
