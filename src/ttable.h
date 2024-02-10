@@ -6,6 +6,5 @@ void push(int element);
 int pop();
 void clear();
 void runFormula(int var[], char formula[], int output[]);
-int add(int a, int b);
 int findOps(const char formula[]);
 int findIndex(char val);

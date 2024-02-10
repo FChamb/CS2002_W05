@@ -4,8 +4,10 @@
 #include <ctype.h>
 #include "ttable.h"
 
-static int stack[1000];
-static int max = 1000;
+#define MAX_STACK_SIZE 1000
+
+static int stack[MAX_STACK_SIZE];
+static int max = MAX_STACK_SIZE;
 static int size = 0;
 
 int main(int argc, char *argv[]) {
@@ -27,9 +29,9 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-    int table[row][col];
+    int (*table)[col] = malloc(row * col * sizeof(int));
     genTable(row, col, table);
-    int output[findOps(formula) + 1];
+    int *output = malloc((findOps(formula) + 1) * sizeof(int));
 
     for (int i = 0; i < col; i++) {
         printf("%c ", 'a' + i);
@@ -57,6 +59,8 @@ int main(int argc, char *argv[]) {
         printf("\n");
     }
 
+    free(table);
+    free(output);
     return 0;
 }
 
@@ -65,19 +69,19 @@ void genTable(int row, int col, int table[row][col]) {
         table[0][i] = 0;
     }
 
-    for (int i = 1; i < (row); i++) {
+    for (int i = 1; i < row; i++) {
         copy(col, table[i], table[i - 1]);
         flip(col, col - 1, table[i]);
     }
 }
 
-void copy(int col, int current[], const int last[]) {
+void copy(int col, int *current, const int *last) {
     for (int i = 0; i < col; i++) {
         current[i] = last[i];
     }
 }
 
-void flip(int col, int last, int table[]) {
+void flip(int col, int last, int *table) {
     if (table[last] == 0) {
         table[last] = 1;
         for (int i = last + 1; i < col; i++) {
@@ -89,11 +93,11 @@ void flip(int col, int last, int table[]) {
 }
 
 int power(int base, int top) {
-    int new = base;
+    int new_base = base;
     for (int i = 0; i < top - 1; i++) {
-        new *= base;
+        new_base *= base;
     }
-    return new;
+    return new_base;
 }
 
 void push(int element) {
@@ -117,7 +121,7 @@ void clear() {
     size = 0;
 }
 
-void runFormula(int var[], char formula[], int output[]) {
+void runFormula(int *var, char *formula, int *output) {
     clear();
     int outIndex = 0;
     for (int i = 0; i < strlen(formula); i++) {
@@ -178,7 +182,7 @@ void runFormula(int var[], char formula[], int output[]) {
     }
 }
 
-int findOps(const char formula[]) {
+int findOps(const char *formula) {
     int numOperators = 0;
     for (int i = 0; formula[i] != '\0'; i++) {
         if (!isalpha(formula[i]) && formula[i] != '0' && formula[i] != '1') {
