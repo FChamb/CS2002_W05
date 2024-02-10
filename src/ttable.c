@@ -128,6 +128,9 @@ void runFormula(int var[], char formula[], int output[]) {
             } else {
                 int index = findIndex(formula[i]);
                 push(var[index]);
+                if (i == strlen(formula) - 1) {
+                    output[outIndex++] = var[index];
+                }
             }
         } else {
             int result;
