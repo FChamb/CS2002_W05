@@ -1,5 +1,4 @@
 int power(int col, int i);
-void genTable(int row, int col, int table[row][col]);
 void copy(int col, int current[], const int last[]);
 void flip(int col, int i, int table[]);
 void push(int element);

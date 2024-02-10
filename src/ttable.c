@@ -4,10 +4,8 @@
 #include <ctype.h>
 #include "ttable.h"
 
-#define MAX_STACK_SIZE 1000
-
-static int stack[MAX_STACK_SIZE];
-static int max = MAX_STACK_SIZE;
+static int stack[1000];
+static int max = 1000;
 static int size = 0;
 
 int main(int argc, char *argv[]) {
@@ -29,10 +27,7 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-    int (*table)[col] = malloc(row * col * sizeof(int));
-    genTable(row, col, table);
-    int *output = malloc((findOps(formula) + 1) * sizeof(int));
-
+    int output[findOps(formula) + 1];
     for (int i = 0; i < col; i++) {
         printf("%c ", 'a' + i);
     }
@@ -41,10 +36,21 @@ int main(int argc, char *argv[]) {
         printf("=");
     }
     printf("\n");
-    for (int i = 0; i < row; i++) {
-        runFormula(table[i], formula, output);
+    int lastTable[col];
+    for (int i = 0; i < (row); i++) {
+        int table[col];
+        if (i == 0) {
+            for (int k = 0; k < col; k++) {
+                table[k] = 0;
+            }
+        }
+        if (i >= 1) {
+            copy(col, table, lastTable);
+            flip(col, col - 1, table);
+        }
+        runFormula(table, formula, output);
         for (int j = 0; j < col; j++) {
-            printf("%d ", table[i][j]);
+            printf("%d ", table[j]);
         }
         printf(": ");
         int outIndex = 0;
@@ -57,30 +63,18 @@ int main(int argc, char *argv[]) {
         }
         printf(" :   %d", output[outIndex]);
         printf("\n");
+        copy(col, lastTable, table);
     }
-    free(table);
-    free(output);
     return 0;
 }
 
-void genTable(int row, int col, int table[row][col]) {
-    for (int i = 0; i < col; i++) {
-        table[0][i] = 0;
-    }
-
-    for (int i = 1; i < row; i++) {
-        copy(col, table[i], table[i - 1]);
-        flip(col, col - 1, table[i]);
-    }
-}
-
-void copy(int col, int *current, const int *last) {
+void copy(int col, int current[], const int last[]) {
     for (int i = 0; i < col; i++) {
         current[i] = last[i];
     }
 }
 
-void flip(int col, int last, int *table) {
+void flip(int col, int last, int table[]) {
     if (table[last] == 0) {
         table[last] = 1;
         for (int i = last + 1; i < col; i++) {
@@ -92,11 +86,11 @@ void flip(int col, int last, int *table) {
 }
 
 int power(int base, int top) {
-    int new_base = base;
+    int new = base;
     for (int i = 0; i < top - 1; i++) {
-        new_base *= base;
+        new *= base;
     }
-    return new_base;
+    return new;
 }
 
 void push(int element) {
@@ -120,7 +114,7 @@ void clear() {
     size = 0;
 }
 
-void runFormula(int *var, char *formula, int *output) {
+void runFormula(int var[], char formula[], int output[]) {
     clear();
     int outIndex = 0;
     for (int i = 0; i < strlen(formula); i++) {
@@ -134,9 +128,6 @@ void runFormula(int *var, char *formula, int *output) {
             } else {
                 int index = findIndex(formula[i]);
                 push(var[index]);
-                if (i == strlen(formula) - 1) {
-                    output[outIndex++] = var[index];
-                }
             }
         } else {
             int result;
@@ -184,7 +175,7 @@ void runFormula(int *var, char *formula, int *output) {
     }
 }
 
-int findOps(const char *formula) {
+int findOps(const char formula[]) {
     int numOperators = 0;
     for (int i = 0; formula[i] != '\0'; i++) {
         if (!isalpha(formula[i]) && formula[i] != '0' && formula[i] != '1') {
