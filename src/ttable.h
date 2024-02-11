@@ -1,3 +1,4 @@
+void printOutput(int col, int row, char formula[]);
 int power(int col, int i);
 void copy(int col, int current[], const int last[]);
 void flip(int col, int i, int table[]);
