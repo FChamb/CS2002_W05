@@ -7,6 +7,6 @@
 #### 1. Open the terminal and cd into the project directory and then the src directory. (/CS2002_W05/src)
 #### 2. Enter the command $ make
 #### 3. To run the program or the test enter the following commands:
-##### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; - Run program: $ ./ttable \<numberOfVariables> \<formula>
-##### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; - Test Program: $ ./tests
+##### &emsp;&emsp; - Run program: $ ./ttable \<numberOfVariables> \<formula>
+##### &emsp;&emsp; - Test Program: $ ./tests
 #### 4. Use the program or watch tests run.
