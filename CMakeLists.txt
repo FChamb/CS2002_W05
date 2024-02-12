@@ -8,4 +8,5 @@ add_executable(CS2002_W05
         src/ttable.h
         src/testTTable.c
         src/testTTable.h
-        src/ttableFunctions.c)
+        src/ttableFunctions.c
+        src/partTwo.c)
