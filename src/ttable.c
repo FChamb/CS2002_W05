@@ -19,7 +19,7 @@ static int max = 1000;
  */
 int main(int argc, char *argv[]) {
     if (argc != 3) {
-        printf("Usage: %s <numberOfVariables> <formula>\n", argv[0]);
+        printf("Usage: %s <numberOfVariables> <'formula'>\n", argv[0]);
         return 1;
     }
 

@@ -39,7 +39,7 @@ void printOutput(int col, int row, char formula[]) {
     for (int i = 0; i < col; i++) {
         printf("%c ", 'a' + i);
     }
-    // Print the : <formula> : Result section of header followed by line of ===...
+    // Print the : <'formula'> : Result section of header followed by line of ===...
     printf(": %s : Result\n", formula);
     for (int i = 0; i < ((col * 2) + strlen(formula) + 11); i++) {
         printf("=");
