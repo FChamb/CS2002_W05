@@ -200,6 +200,11 @@ int getSize() {
 void runFormula(int var[], char formula[], int output[]) {
     clear();
     int outIndex = 0;
+    if (strlen(formula) == 1 && (isalpha(formula[0]) || formula[0] == '1' || formula[0] == '0')) {
+        if (isalpha(formula[0])) {
+
+        }
+    }
     for (int i = 0; i < strlen(formula); i++) {
         if (isalpha(formula[i]) || formula[i] == '0' || formula[i] == '1') {
             if (formula[i] == '0' || formula[i] == '1') {
@@ -291,4 +296,35 @@ int findIndex(char val) {
         }
     }
     return -1;
+}
+
+/**
+ * findVar takes the provided formula and counts the number of variables or letters
+ * found without counting duplicates.
+ * @param formula the string representation of the formula
+ * @return numVariables the count of variables in the formula
+ */
+int findVar(const char formula[]) {
+    char found[26];
+    for (int i = 0; i < 26; i++) {
+        found[i] = '0';
+    }
+    for (int i = 0; i < strlen(formula); i++) {
+        if (isalpha(formula[i])) {
+            for (int j = 0; 26; j++) {
+                if (found[j] == '0') {
+                    found[j] = formula[i];
+                }
+                if (formula[i] == found[j]) {
+                    break;
+                }
+            }
+        }
+    }
+    for (int i = 26; i > 0; i--) {
+        if (found[i - 1] != '0') {
+            return i;
+        }
+    }
+    return 0;
 }

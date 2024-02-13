@@ -9,3 +9,4 @@ int getSize();
 void runFormula(int var[], char formula[], int output[]);
 int findOps(const char formula[]);
 int findIndex(char val);
+int findVar(const char formula[]);

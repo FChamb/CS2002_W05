@@ -6,7 +6,7 @@ ttable : ttable.o ttableFunctions.o
 ttable.o : ttable.c
 	clang ttable.c -c -o ttable.o -Wall -Wextra -g
 
-ttableFunctions.o : ttableFunctions.c ttableFunctions.h
+ttableFunctions.o : ttableFunctions.c ttable.h
 	clang ttableFunctions.c -c -o ttableFunctions.o -Wall -Wextra -g
 
 tests : testTTable.o ttableFunctions.o

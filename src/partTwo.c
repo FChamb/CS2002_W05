@@ -35,7 +35,7 @@ int main() {
     printf("\n");
     int col3 = 5;
     int row3 = power(2, col1);
-    char formula3[] = "dc|be#|=acd&>&"; // "dc|be#|=acd&>&"  "dc|be#be&-&ab>ed>de>&cad&>"
+    char formula3[] = "dc|be#be&-&ab>ed>de>&cad&>";
     printOutput(col3, row3, formula3);
     printf("\n");
     printf("\n");
