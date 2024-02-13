@@ -18,14 +18,27 @@ int main() {
     // Run the output for question two in Part 2 (Ian & Chris's unfair game)
     printf("--------------------------------------------------------------------------------------------------\n");
     printf("To show the outcome of Ian and Chris's game we start by defining the variables\n");
-    printf("We will let a be heads, b for tails. If a is correct then Chris wins and if b is\n");
-    printf("correct then Ian loses\n");
-    int col2 = 2;
+    printf("We will let a be heads, b for tails. If a is correct then Chris wins and we set\n");
+    printf("that to c. If b is correct then Ian loses and we set that to d.\n");
+    int col2 = 4;
     int row2 = power(2, col2);
-    char formula2[] = "ab|ab&#";
+    char formula2[] = "ac&bd&|";
     printOutput(col2, row2, formula2);
     printf("\n");
     printf("\n");
     //ab#ac->&
+
+    // Run the output for question three in Part 2 (A dinner party)
+    printf("--------------------------------------------------------------------------------------------------\n");
+    printf("\n");
+    printf("\n");
+    printf("\n");
+    int col3 = 5;
+    int row3 = power(2, col1);
+    char formula3[] = "dc|be#|=acd&>&"; // "dc|be#|=acd&>&"  "dc|be#be&-&ab>ed>de>&cad&>"
+    printOutput(col3, row3, formula3);
+    printf("\n");
+    printf("\n");
+
     return 0;
 }
