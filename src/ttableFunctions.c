@@ -201,66 +201,63 @@ void runFormula(int var[], char formula[], int output[]) {
     clear();
     int outIndex = 0;
     if (strlen(formula) == 1 && (isalpha(formula[0]) || formula[0] == '1' || formula[0] == '0')) {
-        if (isalpha(formula[0])) {
-
-        }
-    }
-    for (int i = 0; i < strlen(formula); i++) {
-        if (isalpha(formula[i]) || formula[i] == '0' || formula[i] == '1') {
-            if (formula[i] == '0' || formula[i] == '1') {
-                if (formula[i] == '0') {
-                    push(0);
+        output[0] = var[0];
+    } else {
+        for (int i = 0; i < strlen(formula); i++) {
+            if (isalpha(formula[i]) || formula[i] == '0' || formula[i] == '1') {
+                if (formula[i] == '0' || formula[i] == '1') {
+                    if (formula[i] == '0') {
+                        push(0);
+                    } else {
+                        push(1);
+                    }
                 } else {
-                    push(1);
+                    int index = findIndex(formula[i]);
+                    push(var[index]);
+
                 }
             } else {
-                int index = findIndex(formula[i]);
-                push(var[index]);
-                if (i == strlen(formula) - 1) {
-                    output[outIndex++] = var[index];
+                int result;
+                int opp1;
+                int opp2;
+                switch (formula[i]) {
+                    case '-':
+                        result = (pop() == 0) ? 1 : 0;
+                        break;
+                    case '&':
+                        opp1 = pop();
+                        opp2 = pop();
+                        result = (opp1 == 1 && opp2 == 1) ? 1: 0;
+                        break;
+                    case '|':
+                        opp1 = pop();
+                        opp2 = pop();
+                        result = (opp1 == 1 || opp2 == 1) ? 1 : 0;
+                        break;
+                    case '=':
+                        opp1 = pop();
+                        opp2 = pop();
+                        result = (opp1 == opp2) ? 1 : 0;
+                        break;
+                    case '>':
+                        opp1 = pop();
+                        opp2 = pop();
+                        result = (opp2 == 0 || opp1 == 1) ? 1 : 0;
+                        break;
+                    case '#':
+                        opp1 = pop();
+                        opp2 = pop();
+                        result = (opp1 != opp2) ? 1 : 0;
+                        break;
+                    default:
+                        printf("Error: Invalid Formula!\n");
+                        exit(1);
                 }
-            }
-        } else {
-            int result;
-            int opp1;
-            int opp2;
-            switch (formula[i]) {
-                case '-':
-                    result = (pop() == 0) ? 1 : 0;
-                    break;
-                case '&':
-                    opp1 = pop();
-                    opp2 = pop();
-                    result = (opp1 == 1 && opp2 == 1) ? 1: 0;
-                    break;
-                case '|':
-                    opp1 = pop();
-                    opp2 = pop();
-                    result = (opp1 == 1 || opp2 == 1) ? 1 : 0;
-                    break;
-                case '=':
-                    opp1 = pop();
-                    opp2 = pop();
-                    result = (opp1 == opp2) ? 1 : 0;
-                    break;
-                case '>':
-                    opp1 = pop();
-                    opp2 = pop();
-                    result = (opp2 == 0 || opp1 == 1) ? 1 : 0;
-                    break;
-                case '#':
-                    opp1 = pop();
-                    opp2 = pop();
-                    result = (opp1 != opp2) ? 1 : 0;
-                    break;
-                default:
-                    printf("Error: Invalid Formula!\n");
-                    exit(1);
-            }
-            output[outIndex++] = result;
-            push(result);
-            if (i == strlen(formula) - 1) {
                 output[outIndex++] = result;
+                push(result);
+                if (i == strlen(formula) - 1) {
+                    output[outIndex++] = result;
+                }
             }
         }
     }

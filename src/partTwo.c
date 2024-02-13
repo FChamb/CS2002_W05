@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <string.h>
 #include "ttable.h"
 
 int main() {
@@ -25,15 +24,15 @@ int main() {
     printf("--------------------------------------------------------------------------------------------------\n");
     int col3 = 5;
     int row3 = power(2, col3);
-    char formula3[] = "dc|be#ab&ed>de>&cad&>";
+    char formula3[] = "dc|be#&ab>&ed=&cad&>&";
     printf("Question 3: ./ttable %d %s\n", col3, formula3);
     printOutput(col3, row3, formula3);
 
     // Run the output for question four in Part 2 (Which box is it?)
     printf("--------------------------------------------------------------------------------------------------\n");
     int col4 = 9;
-    int row4 = power(2, col4);
-    char formula4[] = "da>ea>&fh>&ga->&ha->&hh->&aaa-#>&baa-#>&chh->&ab#c#&de#f#&gh#i#&ad-g-&b-&c-&>&da-g-&e-&f-&>&ga-d-&h-&i-&>&be-h-&a-&c-&>&eb-h-&d-&f-&>&hb-e-&g-&i-&>&cf-i-&a-&b-&>&fc-i-&d-&e-&>&ic-f-&g-&h-&>&"; //"da>ea>&fh>&ga->&ha->&hh->&aaa-|>&baa-|>&chh->&ab|c|&de|f|&gh|i|&ad-g-&b-&c-&>&da-g-&e-&f-&>&ga-d-&h-&i-&>&be-h-&a-&c-&>&eb-h-&d-&f-&>&hb-e-&g-&i-&>&cf-i-&a-&b-&>&fc-i-&d-&e-&>&ic-f-&g-&h-&>&";
+    int row4 = power(2, col4); // ab#c#ab&c&#de#f#de&f&#fgh#i#gh&i&#&ad#g#ad&g&#b'e'#h#be&h&#&cf#i#cf&i&#'&&'ac>&bc->&dc>&ec->&ge>&he->&    da>ea>&fh>&ga->&ha->&hh->&aaa-#>&baa-#>&chh->&ab#c#&de#f#&gh#i#&ad-g-&b-&c-&>&da-g-&e-&f-&>&ga-d-&h-&i-&>&be-h-&a-&c-&>&eb-h-&d-&f-&>&hb-e-&g-&i-&>&cf-i-&a-&b-&>&fc-i-&d-&e-&>&ic-f-&g-&h-&>&
+    char formula4[] = "ab#c#ab&c&#de#f#de&f&#fgh#i#gh&i&#&ad#g#ad&g&#be#h#be&h&#&cf#i#cf&i&#&&ac>&bc->&dc>&ec->&ge>&he->&";
     printf("Question 4: ./ttable %d %s\n", col4, formula4);
     printOutput(col4, row4, formula4);
 
