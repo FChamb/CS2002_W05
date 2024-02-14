@@ -17,8 +17,6 @@ int main() {
     char formula2[] = "ab>a-b>|";
     printf("Question 2: ./ttable %d %s\n", col2, formula2);
     printOutput(col2, row2, formula2);
-    printf("\n");
-    printf("\n");
 
     // Run the output for question three in Part 2 (A dinner party)
     printf("--------------------------------------------------------------------------------------------------\n");
@@ -31,8 +29,8 @@ int main() {
     // Run the output for question four in Part 2 (Which box is it?)
     printf("--------------------------------------------------------------------------------------------------\n");
     int col4 = 9;
-    int row4 = power(2, col4); // ab#c#ab&c&#de#f#de&f&#fgh#i#gh&i&#&ad#g#ad&g&#b'e'#h#be&h&#&cf#i#cf&i&#'&&'ac>&bc->&dc>&ec->&ge>&he->&    da>ea>&fh>&ga->&ha->&hh->&aaa-#>&baa-#>&chh->&ab#c#&de#f#&gh#i#&ad-g-&b-&c-&>&da-g-&e-&f-&>&ga-d-&h-&i-&>&be-h-&a-&c-&>&eb-h-&d-&f-&>&hb-e-&g-&i-&>&cf-i-&a-&b-&>&fc-i-&d-&e-&>&ic-f-&g-&h-&>&
-    char formula4[] = "ab#c#ab&c&#de#f#de&f&#fgh#i#gh&i&#&ad#g#ad&g&#be#h#be&h&#&cf#i#cf&i&#&&ac>&bc->&dc>&ec->&ge>&he->&";
+    int row4 = power(2, col4);
+    char formula4[] = "da>ea>&fh>&ga->&ha->&hh->&aaa-#>&baa-#>&chh->&ab#c#&de#f#&gh#i#&ad-g-&b-&c-&>&da-g-&e-&f-&>&ga-d-&h-&i-&>&be-h-&a-&c-&>&eb-h-&d-&f-&>&hb-e-&g-&i-&>&cf-i-&a-&b-&>&fc-i-&d-&e-&>&ic-f-&g-&h-&>&";
     printf("Question 4: ./ttable %d %s\n", col4, formula4);
     printOutput(col4, row4, formula4);
 
