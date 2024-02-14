@@ -39,7 +39,7 @@ int main(int argc, char *argv[]) {
 
     int numVariables = findVar(formula);
     if (numVariables > col) {
-        printf("Error: Formula contains more variables then specified!\n");
+        printf("Error: Formula contains more variables than specified!\n");
         return 1;
     }
 
